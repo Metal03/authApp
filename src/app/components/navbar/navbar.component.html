@@ -12,24 +12,35 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['precios']">Precios</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active" *ngIf="auth.isAuthenticated$ | async">
           <a class="nav-link" [routerLink]="['protegida']">Protegida</a>
         </li>
       </ul>
-      <!-- <span class="navbar-text">
-        <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-          <button class="btn btn-outline-danger" 
-                  (click)="auth.logout()">
-            Logout
-          </button>
-        </ng-container>
-
-        <ng-container #loggedOut>
-          <button class="btn btn-outline-primary" (clic) = " loginWithRedirect () ">
-            Login
-          </button>
-        </ng-container>
-      </span> -->
+      <ul class="navbar-nav ml-auto" *ngIf="user !== undefined">
+        <br>
+        <li class="nav-item">
+          <div *ngIf="user.picture" class="avatar_mask">
+              <img src="{{ user.picture}}" class="avatar_nav">
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <strong> {{ user?.name }}</strong>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            
+          </div>
+        </li>
+      </ul>
+      <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut" class="dropdown-item">
+        <button class="btn btn-outline-danger" (click)="logout()">
+          Logout
+        </button>
+      </ng-container>
+      <ng-template #loggedOut>
+        <button class="btn btn-outline-primary" (click)="auth.loginWithRedirect()">Login</button>
+      </ng-template>
+      
     </div>
   </div>
 </nav>

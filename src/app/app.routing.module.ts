@@ -1,21 +1,15 @@
+import { AuthGuard } from './services/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// import { HomeComponent } from './components/home/home.component';
-// import { PreciosComponent } from './components/precios/precios.component';
-// import { ProtegidaComponent } from './components/protegida/protegida.component';
+import { HomeComponent } from './components/home/home.component';
+import { PreciosComponent } from './components/precios/precios.component';
+import { ProtegidaComponent } from './components/protegida/protegida.component';
 
 const routes: Routes = [
+    { path: 'home', component: HomeComponent },
+    { path: 'precios', component: PreciosComponent },
     { 
-        path: 'home',
-        loadChildren: () => import('./components/home/home.component').then(m => m.HomeComponent)
-    },
-    { 
-        path: 'precios', 
-        loadChildren: () => import('./components/precios/precios.component').then(m => m.PreciosComponent)
-    },
-    { 
-        path: 'protegida',
-        loadChildren: () => import('./components/protegida/protegida.component').then(m => m.ProtegidaComponent)
+        path: 'protegida', component: ProtegidaComponent, canActivate: [AuthGuard]
     },
     { path: '**', pathMatch: 'full', redirectTo: 'home'}
 ]

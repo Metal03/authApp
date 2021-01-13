@@ -9,7 +9,7 @@ import { PreciosComponent } from './components/precios/precios.component';
 import { AppRoutingModule } from './app.routing.module';
 // Import SDK Auth0
 import { AuthModule } from '@auth0/auth0-angular';
-;
+
 
 @NgModule({
   declarations: [
@@ -26,8 +26,6 @@ import { AuthModule } from '@auth0/auth0-angular';
       domain: 'dev-raoet4ue.us.auth0.com',
       clientId: 'wHEQRICfBAMgcFdUXQ69hXpGw854YTP6'
     })
-  ],
-  providers: [
   ],
   bootstrap: [AppComponent]
 })
